@@ -18,9 +18,9 @@ namespace Movies.Controllers
 
         public ActionResult GetList()
         {
-            using (DBModel db = new DBModel())
+            using (DBModels db = new DBModels())
             {
-                var movlist = db.lists.ToList<list>();
+                var movlist = db.Lists.ToList<List>();
                 return Json(new { data = movlist }, JsonRequestBehavior.AllowGet);
             }
         }

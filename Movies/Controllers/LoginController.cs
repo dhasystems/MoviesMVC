@@ -20,7 +20,7 @@ namespace Movies.Controllers
         [HttpPost]
         public ActionResult Authorize(User userModel)
         {
-            using (DBModel dbModel = new DBModel())
+            using (DBModels dbModel = new DBModels())
             {
                 var currentAccount = dbModel.Users.SingleOrDefault(a => a.Username.Equals(userModel.Username));
                 if (currentAccount != null)

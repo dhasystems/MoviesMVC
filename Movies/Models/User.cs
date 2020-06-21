@@ -18,7 +18,7 @@ namespace Movies.Models
     {
         public int UserID { get; set; }
 
-        [Required(ErrorMessage = "This field is required.")]
+        [Required(ErrorMessage = "This field is required!")]
         [DisplayName("User Name")]
         public string Username { get; set; }
 
@@ -31,5 +31,6 @@ namespace Movies.Models
         public string FullName { get; set; }
 
         public string LoginErrorMessage { get; set; }
+
     }
 }

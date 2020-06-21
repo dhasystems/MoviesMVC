@@ -18,9 +18,9 @@ namespace Movies.Controllers
 
         public ActionResult GetData()
         {
-            using (DBModel db = new DBModel())
+            using (DBModels db = new DBModels())
             {
-                List<list> movList = db.lists.ToList<list>();
+                List<List> movList = db.Lists.ToList<List>();
                 return Json(new { data = movList }, JsonRequestBehavior.AllowGet);
             }
         }
@@ -29,24 +29,24 @@ namespace Movies.Controllers
         public ActionResult AddOrEdit(int id = 0)
         {
             if (id == 0)
-                return View(new list());
+                return View(new List());
             else
             {
-                using (DBModel db = new DBModel())
+                using (DBModels db = new DBModels())
                 {
-                    return View(db.lists.Where(x => x.id == id).FirstOrDefault<list>());
+                    return View(db.Lists.Where(x => x.id == id).FirstOrDefault<List>());
                 }
             }
         }
 
         [HttpPost]
-        public ActionResult AddOrEdit(list mov)
+        public ActionResult AddOrEdit(List mov)
         {
-            using (DBModel db = new DBModel())
+            using (DBModels db = new DBModels())
             {
                 if (mov.id == 0)
                 {
-                    db.lists.Add(mov);
+                    db.Lists.Add(mov);
                     db.SaveChanges();
                     return Json(new { success = true, message = "Saved Successfully" }, JsonRequestBehavior.AllowGet);
                     
@@ -65,10 +65,10 @@ namespace Movies.Controllers
         [HttpPost]
         public ActionResult Delete(int id)
         {
-            using (DBModel db = new DBModel())
+            using (DBModels db = new DBModels())
             {
-                list mov = db.lists.Where(x => x.id == id).FirstOrDefault<list>();
-                db.lists.Remove(mov);
+                List mov = db.Lists.Where(x => x.id == id).FirstOrDefault<List>();
+                db.Lists.Remove(mov);
                 db.SaveChanges();
                 return Json(new { success = true, message = "Deleted Successfully" }, JsonRequestBehavior.AllowGet);
             }

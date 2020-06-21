@@ -13,10 +13,10 @@ namespace Movies.Models
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
-    using System.Drawing.Drawing2D;
 
-    public partial class list
+    public partial class List
     {
+
         public int id { get; set; }
 
         [DisplayName("TMDB ID")]
@@ -26,7 +26,7 @@ namespace Movies.Models
         [DisplayName("Title")]
         [Required(ErrorMessage = "This Field is Required")]
         public string title { get; set; }
-      
+
         [DisplayName("Year")]
         [Required(ErrorMessage = "This Field is Required")]
         public string year { get; set; }
@@ -47,7 +47,4 @@ namespace Movies.Models
         [DisplayName("Trailer Link")]
         public string trailer { get; set; }
     }
-    
-
-
 }

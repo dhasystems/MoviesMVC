@@ -21,7 +21,7 @@ namespace Movies.Controllers
         [HttpPost]
         public ActionResult Register(User userModel)
         {
-            using (DBModel dbModel = new DBModel())
+            using (DBModels dbModel = new DBModels())
             {
                 if (dbModel.Users.Any(x => x.Username == userModel.Username))
                 {

@@ -154,7 +154,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DBModels.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\list.cs">
+    <Compile Include="Models\List.cs">
       <DependentUpon>DBModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs">
@@ -213,24 +213,24 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\NoImage.jpg" />
+    <Content Include="Models\DBModels.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DBModels.edmx</DependentUpon>
+      <LastGenOutput>DBModels.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\DBModels.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DBModels.edmx</DependentUpon>
+      <LastGenOutput>DBModels.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <EntityDeploy Include="Models\DBModels.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DBModels.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\DBModels.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DBModels.edmx</DependentUpon>
-      <LastGenOutput>DBModels.Context.cs</LastGenOutput>
-    </Content>
     <Content Include="Models\DBModels.edmx.diagram">
       <DependentUpon>DBModels.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\DBModels.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DBModels.edmx</DependentUpon>
-      <LastGenOutput>DBModels.cs</LastGenOutput>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

@@ -13,10 +13,10 @@ namespace Movies.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DBModel : DbContext
+    public partial class DBModels : DbContext
     {
-        public DBModel()
-            : base("name=DBModel")
+        public DBModels()
+            : base("name=DBModels")
         {
         }
     
@@ -25,7 +25,7 @@ namespace Movies.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<List> Lists { get; set; }
         public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<list> lists { get; set; }
     }
 }

@@ -4,17 +4,8 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MoviesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="User">
-          <Key>
-            <PropertyRef Name="UserID" />
-          </Key>
-          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Username" Type="varchar" MaxLength="50" />
-          <Property Name="Password" Type="varchar" MaxLength="250" />
-          <Property Name="FullName" Type="varchar" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="list">
+      <Schema Namespace="Movies2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="List">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -22,31 +13,31 @@
           <Property Name="tmdb_id" Type="int" />
           <Property Name="title" Type="nvarchar" MaxLength="100" />
           <Property Name="year" Type="nvarchar" MaxLength="4" />
-          <Property Name="quality" Type="nvarchar" MaxLength="5" />
           <Property Name="type" Type="nvarchar" MaxLength="20" />
           <Property Name="genre" Type="nvarchar" MaxLength="50" />
           <Property Name="poster" Type="nvarchar" MaxLength="500" />
           <Property Name="trailer" Type="nvarchar" MaxLength="500" />
+          <Property Name="quality" Type="nvarchar" MaxLength="20" />
         </EntityType>
-        <EntityContainer Name="MoviesModelStoreContainer">
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="300" />
+          <Property Name="FullName" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityContainer Name="Movies2ModelStoreContainer">
+          <EntitySet Name="List" EntityType="Self.List" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="list" EntityType="Self.list" Schema="movies" store:Type="Tables" />
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="MoviesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="User">
-          <Key>
-            <PropertyRef Name="UserID" />
-          </Key>
-          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Password" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="list">
+      <Schema Namespace="Movies2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="List">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -54,44 +45,53 @@
           <Property Name="tmdb_id" Type="Int32" />
           <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="year" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
-          <Property Name="quality" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
           <Property Name="type" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="genre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="poster" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="trailer" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="quality" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityContainer Name="DBModel" annotation:LazyLoadingEnabled="true">
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="FullName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="DBModels" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Lists" EntityType="Self.List" />
           <EntitySet Name="Users" EntityType="Self.User" />
-          <EntitySet Name="lists" EntityType="Self.list" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="MoviesModelStoreContainer" CdmEntityContainer="DBModel">
+        <EntityContainerMapping StorageEntityContainer="Movies2ModelStoreContainer" CdmEntityContainer="DBModels">
+          <EntitySetMapping Name="Lists">
+            <EntityTypeMapping TypeName="Movies2Model.List">
+              <MappingFragment StoreEntitySet="List">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="tmdb_id" ColumnName="tmdb_id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="genre" ColumnName="genre" />
+                <ScalarProperty Name="poster" ColumnName="poster" />
+                <ScalarProperty Name="trailer" ColumnName="trailer" />
+                <ScalarProperty Name="quality" ColumnName="quality" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="MoviesModel.User">
+            <EntityTypeMapping TypeName="Movies2Model.User">
               <MappingFragment StoreEntitySet="User">
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="FullName" ColumnName="FullName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="lists">
-            <EntityTypeMapping TypeName="MoviesModel.list">
-              <MappingFragment StoreEntitySet="list">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="tmdb_id" ColumnName="tmdb_id" />
-                <ScalarProperty Name="title" ColumnName="title" />
-                <ScalarProperty Name="year" ColumnName="year" />
-                <ScalarProperty Name="quality" ColumnName="quality" />
-                <ScalarProperty Name="type" ColumnName="type" />
-                <ScalarProperty Name="genre" ColumnName="genre" />
-                <ScalarProperty Name="poster" ColumnName="poster" />
-                <ScalarProperty Name="trailer" ColumnName="trailer" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
